@@ -1,3 +1,8 @@
+//  Created by BugArchitect on 2021/12/29.
+//  Copyright Â© 2021å¹´ BugArchitectweb. All rights reserved.
+/*
+	Dynamic Array
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <malloc.h>
@@ -6,9 +11,9 @@
 
 struct DynamicArray
 {
-	int* pArrayFirstAddress;												   //¼ÇÂ¼¶¯Ì¬Êı×éµÄÊ×µØÖ·
-	unsigned int Capacity;													   //¿É´æ´¢µÄÊı¾İ×ÜÁ¿
-	unsigned int Quantity;													   //ÒÑ´æ´¢µÄÊı¾İ×ÜÁ¿
+	int* pArrayFirstAddress;												   //è®°å½•åŠ¨æ€æ•°ç»„çš„é¦–åœ°å€
+	unsigned int Capacity;													   //å¯å­˜å‚¨çš„æ•°æ®æ€»é‡
+	unsigned int Quantity;													   //å·²å­˜å‚¨çš„æ•°æ®æ€»é‡
 };
 
 void InitializeArray(struct DynamicArray* p_DynamicArray);
@@ -79,44 +84,44 @@ void IncreaseCapacity(struct DynamicArray* p_DynamicArray)
 	{
 		return;
 	}
-	if (p_DynamicArray->Capacity == p_DynamicArray->Quantity)                  //ÅĞ¶Ï¿Õ¼äÊÇ·ñÒÑÂú
+	if (p_DynamicArray->Capacity == p_DynamicArray->Quantity)                  //åˆ¤æ–­ç©ºé—´æ˜¯å¦å·²æ»¡
 	{
 
-		p_DynamicArray->Capacity += 10;										   //Ôö¼Ó¿É´æ´¢Êı¾İµÄ¿Õ¼ä  		  
-		int* pTemp = (int*)malloc(sizeof(int) * p_DynamicArray->Capacity);	   //ÉêÇëÒ»¶Î¿Õ¼ä
+		p_DynamicArray->Capacity += 10;										   //å¢åŠ å¯å­˜å‚¨æ•°æ®çš„ç©ºé—´  		  
+		int* pTemp = (int*)malloc(sizeof(int) * p_DynamicArray->Capacity);	   //ç”³è¯·ä¸€æ®µç©ºé—´
 		memset(pTemp,0,sizeof(int)*p_DynamicArray->Capacity);
 		for (unsigned int i = 0; i < p_DynamicArray->Quantity; i++)
 		{
-			pTemp[i] = p_DynamicArray->pArrayFirstAddress[i];				   //½«Ô­Êı¾İ¸³µ½ĞÂ¿Õ¼äÖĞ
+			pTemp[i] = p_DynamicArray->pArrayFirstAddress[i];				   //å°†åŸæ•°æ®èµ‹åˆ°æ–°ç©ºé—´ä¸­
 		}
-		free(p_DynamicArray->pArrayFirstAddress);                              //ÊÍ·ÅÔ­¿Õ¼ä
-		p_DynamicArray->pArrayFirstAddress = pTemp;					           //½«Êı×éÊ×µØÖ·Ö¸ÕëÖ¸ÏòÒ»¿éĞÂ¿Õ¼ä	
+		free(p_DynamicArray->pArrayFirstAddress);                              //é‡Šæ”¾åŸç©ºé—´
+		p_DynamicArray->pArrayFirstAddress = pTemp;					           //å°†æ•°ç»„é¦–åœ°å€æŒ‡é’ˆæŒ‡å‘ä¸€å—æ–°ç©ºé—´	
 	}
 }
 void AddElement(struct DynamicArray* p_DynamicArray, int Element)
 {
 	if (NULL == p_DynamicArray)
 	{
-		printf("²ÎÊı´íÎó£¡\n");
+		printf("å‚æ•°é”™è¯¯ï¼\n");
 		return;
 	}
 	IncreaseCapacity(p_DynamicArray);
-	p_DynamicArray->pArrayFirstAddress[p_DynamicArray->Quantity] = Element;    //½«Êı¾İ´¢´æ½øÈ¥
+	p_DynamicArray->pArrayFirstAddress[p_DynamicArray->Quantity] = Element;    //å°†æ•°æ®å‚¨å­˜è¿›å»
 	p_DynamicArray->Quantity++;
 }
 void AddArrayMiddleElement(struct DynamicArray* p_DynamicArray, int Element, unsigned int Subscript)
 {
-	if (NULL == p_DynamicArray)                                                 //ÅĞ¶ÏÊäÈëµÄ²ÎÊıÊÇ·ñºÏ·¨
+	if (NULL == p_DynamicArray)                                                 //åˆ¤æ–­è¾“å…¥çš„å‚æ•°æ˜¯å¦åˆæ³•
 	{
-		printf("²ÎÊı´íÎó£¡\n");
+		printf("å‚æ•°é”™è¯¯ï¼\n");
 		return;
 	}
 	IncreaseCapacity(p_DynamicArray);
-	if (Subscript > p_DynamicArray->Quantity)									//ÅĞ¶ÏÏÂ±êÊÇ·ñ³¬³öÊµ¼ÊÊı×é´¢´æÊı
+	if (Subscript > p_DynamicArray->Quantity)									//åˆ¤æ–­ä¸‹æ ‡æ˜¯å¦è¶…å‡ºå®é™…æ•°ç»„å‚¨å­˜æ•°
 	{
 		Subscript = p_DynamicArray->Quantity;
 	}
-	for (unsigned int i = p_DynamicArray->Quantity; i >= Subscript; i--)		//ÈÃÊı×éÖĞµÄÔªËØºóÒÆ
+	for (unsigned int i = p_DynamicArray->Quantity; i >= Subscript; i--)		//è®©æ•°ç»„ä¸­çš„å…ƒç´ åç§»
 	{
 		p_DynamicArray->pArrayFirstAddress[i] = p_DynamicArray->pArrayFirstAddress[i - 1];
 	}
@@ -139,7 +144,7 @@ void DeleteArrayMiddleElement(struct DynamicArray* p_DynamicArray,unsigned int S
 	}
 	if(Subscript >= p_DynamicArray->Quantity)
 	{
-		printf("²ÎÊı´íÎó£¡");
+		printf("å‚æ•°é”™è¯¯ï¼");
 		return;
 	}
 	for(unsigned int i = Subscript;i < p_DynamicArray->Quantity - 1;i++)
@@ -171,7 +176,7 @@ void FindArrayElement(struct DynamicArray* p_DynamicArray,int Element)
 {
 	if(NULL == p_DynamicArray)
 	{
-		printf("²ÎÊıÊäÈë´íÎó£¡");
+		printf("å‚æ•°è¾“å…¥é”™è¯¯ï¼");
 		return;
 	}
 	int flag = -1;
@@ -182,20 +187,20 @@ void FindArrayElement(struct DynamicArray* p_DynamicArray,int Element)
 			flag = i;
 		}
 	}
-	printf("¸ÃÔªËØ¶ÔÓ¦µÄÏÂ±êÎª£º%d",flag);
+	printf("è¯¥å…ƒç´ å¯¹åº”çš„ä¸‹æ ‡ä¸ºï¼š%d",flag);
 }
 void OutputElement(struct DynamicArray* p_DynamicArray)
 {
 	if (NULL == p_DynamicArray)
 	{
-		printf("²ÎÊı´íÎó£¡");
+		printf("å‚æ•°é”™è¯¯ï¼");
 		return;
 	}
-	printf("¿É´æ´¢Êı£º%u  ÒÑ´æ´¢Êı£º%u\n", p_DynamicArray->Capacity, p_DynamicArray->Quantity);
-	printf("Êı×éÄÚµÄÔªËØ£º\n");
+	printf("å¯å­˜å‚¨æ•°ï¼š%u  å·²å­˜å‚¨æ•°ï¼š%u\n", p_DynamicArray->Capacity, p_DynamicArray->Quantity);
+	printf("æ•°ç»„å†…çš„å…ƒç´ ï¼š\n");
 	for (unsigned int i = 0; i < p_DynamicArray->Quantity; i++)
 	{
-		//printf("µÚ%d¸öÊı£º", i + 1);
+		//printf("ç¬¬%dä¸ªæ•°ï¼š", i + 1);
 		printf("%d ", p_DynamicArray->pArrayFirstAddress[i]);
 	}
 	printf("\n\n");
