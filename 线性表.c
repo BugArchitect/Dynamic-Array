@@ -1,8 +1,10 @@
-//  Created by BugArchitect on 2021/12/29.
-//  Copyright © 2021年 BugArchitectweb. All rights reserved.
 /*
-	Dynamic Array
+Created by BugArchitect on 2021/12/29.
+Copyright © 2021年 BugArchitect. All rights reserved.
 */
+
+//	Dynamic Array
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <malloc.h>
